@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Notes — Index</title>
+    <style>
+        /* small extra styles for nicer 3D perspective */
+        .scene { perspective: 1200px; }
+        .card-3d { transform-style: preserve-3d; will-change: transform; }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-zinc-900 via-slate-900 to-zinc-800 text-white">
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        <header class="mb-10">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-center bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 to-indigo-400">
+                Your Notes
+            </h1>
+            <p class="mt-3 text-center text-zinc-300">Responsive, modern & 3D-styled list of files</p>
+        </header>
+
+        <section class="scene">
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                <% if (typeof filenames !== 'undefined' && filenames.length) { %>
+                    <% filenames.forEach(function(filename){ %>
+                        <a href="/show/<%= encodeURIComponent(filename) %>" class="group block">
+                            <div class="card-3d bg-gradient-to-br from-zinc-800 to-slate-800 rounded-2xl p-6 shadow-2xl shadow-black/50 transform transition duration-300 ease-out hover:scale-105 hover:-translate-y-3 hover:rotate-1 hover:shadow-[0_30px_60px_rgba(0,0,0,0.6)]">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-500 to-cyan-400 text-zinc-900 font-bold text-lg shrink-0 transform-gpu group-hover:rotate-6">
+                                        <%= filename.charAt(0).toUpperCase() %>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h2 class="text-lg font-semibold text-white"><%= filename.split('.').slice(0, -1).join('.') || filename %></h2>
+                                        <p class="mt-1 text-sm text-zinc-300">File: <span class="font-mono text-xs text-zinc-200"><%= filename %></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    <% }) %>
+                <% } else { %>
+                    <div class="col-span-full">
+                        <div class="bg-gradient-to-br from-zinc-800 to-slate-800 rounded-2xl p-8 shadow-2xl text-center">
+                            <p class="text-zinc-300">No files found.</p>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </section>
+
+        <footer class="mt-12 text-center text-sm text-zinc-400">
+            Tips: Hover a card for a subtle 3D lift
+        </footer>
+    </main>
+</body>
+</html>
