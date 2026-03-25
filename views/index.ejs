@@ -29,6 +29,8 @@
                     <div class="task bg-zinc-800/50 backdrop-blur-md p-6 rounded-xl shadow-xl transform hover:-translate-y-2 transition-all hover:shadow-blue-500/20">
                         <h1 class="text-white text-2xl tracking-wider uppercase mb-4"><%= val.split('.')[0] %></h1>
                         <a href="/files/<%= val %>" class="text-blue-400 hover:text-blue-300 transition-colors">Read More →</a>
+                         <br>
+                        <a href="/edit/<%= val %>" class="text-blue-400 hover:text-blue-300 transition-colors"> Edit </a>
                     </div>
                 <% }) %>
             <% } else { %>
